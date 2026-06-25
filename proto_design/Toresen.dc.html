@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{font-family:'Pretendard',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;background:#F4F7F6;color:#16241F;}
+::selection{background:#C7F0DE;}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:#D6E0DC;border-radius:8px;border:2px solid #F4F7F6;}
+::-webkit-scrollbar-track{background:transparent;}
+button{font-family:inherit;}
+image-slot{display:block;}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="display:flex;min-height:100vh;background:#F4F7F6;color:#16241F;">
+
+  <aside style="width:248px;flex:none;background:#FFFFFF;border-right:1px solid #EAEFED;display:flex;flex-direction:column;padding:22px 16px;position:sticky;top:0;height:100vh;">
+    <div style="display:flex;align-items:center;gap:11px;padding:4px 8px 22px;">
+      <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#10B981,#34D399);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:19px;box-shadow:0 4px 12px rgba(16,185,129,.35);">T</div>
+      <div>
+        <div style="font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1;">Toresen</div>
+        <div style="font-size:11.5px;color:#8A9A93;font-weight:600;margin-top:3px;">코딩 훈련 도장</div>
+      </div>
+    </div>
+
+    <nav style="display:flex;flex-direction:column;gap:4px;">
+      <a onClick="{{ goDash }}" style="{{ navDash }}" style-hover="background:#F1F5F3;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        대시보드
+      </a>
+      <a onClick="{{ goAsgn }}" style="{{ navAsgn }}" style-hover="background:#F1F5F3;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1.5"/><path d="M9 13l2 2 4-4"/></svg>
+        과제
+      </a>
+      <a onClick="{{ goReview }}" style="{{ navReview }}" style-hover="background:#F1F5F3;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg>
+        리뷰
+      </a>
+      <a onClick="{{ goPersona }}" style="{{ navPersona }}" style-hover="background:#F1F5F3;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+        트레이너
+      </a>
+    </nav>
+
+    <div style="flex:1;"></div>
+
+    <button onClick="{{ obRestart }}" style="display:flex;align-items:center;gap:8px;background:transparent;border:none;color:#8A9A93;font-size:13px;font-weight:600;cursor:pointer;padding:8px;border-radius:10px;margin-bottom:8px;" style-hover="background:#F1F5F3;color:#5B6B65;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      온보딩 다시 보기
+    </button>
+
+    <div style="background:#F1F5F3;border-radius:16px;padding:14px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:11px;background:#16241F;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;">나</div>
+        <div style="min-width:0;">
+          <div style="font-size:13.5px;font-weight:700;line-height:1.1;">학습자</div>
+          <div style="font-size:11.5px;color:#0E9A6E;font-weight:700;margin-top:2px;">Lv.7 · 그래픽스</div>
+        </div>
+      </div>
+      <div style="margin-top:11px;height:6px;border-radius:999px;background:#E2EAE6;overflow:hidden;">
+        <div style="width:64%;height:100%;border-radius:999px;background:linear-gradient(90deg,#10B981,#FB923C);"></div>
+      </div>
+      <div style="font-size:11px;color:#8A9A93;font-weight:600;margin-top:6px;">다음 레벨까지 180 XP</div>
+    </div>
+  </aside>
+
+  <main style="flex:1;min-width:0;padding:34px clamp(20px,4vw,48px) 64px;">
+
+    <sc-if value="{{ showDash }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="대시보드" style="display:flex;flex-direction:column;gap:24px;max-width:1080px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;">
+        <div>
+          <div style="font-size:13px;font-weight:800;color:#0E9A6E;letter-spacing:.02em;">그래픽스 도장 · Lv.7</div>
+          <h1 style="margin:7px 0 5px;font-size:clamp(23px,3vw,30px);font-weight:800;letter-spacing:-.025em;">텍스처 매핑까지 한 걸음 남았어요</h1>
+          <p style="margin:0;color:#5E7B6F;font-size:15px;">리뷰 지적 3건만 반영하면 다음 스킬 노드가 열려요.</p>
+        </div>
+        <button onClick="{{ goReview }}" style="background:#10B981;color:#fff;border:none;border-radius:12px;padding:12px 20px;font-size:14.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(16,185,129,.28);" style-hover="background:#0E9A6E;">리뷰 이어보기</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+        <div style="background:#fff;border:1px solid #EAEFED;border-radius:18px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+          <div style="font-size:13px;color:#8A9A93;font-weight:700;">현재 레벨</div>
+          <div style="display:flex;align-items:baseline;gap:7px;margin:6px 0 12px;"><span style="font-size:28px;font-weight:800;letter-spacing:-.02em;">Lv.7</span><span style="font-size:13px;color:#5E7B6F;font-weight:600;">320 / 500 XP</span></div>
+          <div style="height:7px;border-radius:999px;background:#EEF2F0;overflow:hidden;"><div style="width:64%;height:100%;border-radius:999px;background:linear-gradient(90deg,#10B981,#34D399);"></div></div>
+        </div>
+        <div style="background:#fff;border:1px solid #EAEFED;border-radius:18px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+          <div style="font-size:13px;color:#8A9A93;font-weight:700;">연속 학습</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-top:6px;"><span style="font-size:28px;font-weight:800;letter-spacing:-.02em;color:#F97316;">5</span><span style="font-size:15px;font-weight:700;color:#F97316;">일째</span></div>
+          <div style="font-size:12.5px;color:#5E7B6F;font-weight:600;margin-top:10px;">오늘도 이어가면 6일째 🔥 없이도 꾸준해요</div>
+        </div>
+        <div style="background:#fff;border:1px solid #EAEFED;border-radius:18px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+          <div style="font-size:13px;color:#8A9A93;font-weight:700;">통과한 과제</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-top:6px;"><span style="font-size:28px;font-weight:800;letter-spacing:-.02em;">12</span><span style="font-size:15px;font-weight:700;color:#5E7B6F;">개</span></div>
+          <div style="font-size:12.5px;color:#5E7B6F;font-weight:600;margin-top:10px;">스킬 노드 9개 완료 · 1개 진행 중</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;">
+        <section style="flex:2 1 460px;background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+            <h2 style="margin:0;font-size:18px;font-weight:800;letter-spacing:-.02em;">스킬 트리</h2>
+            <div style="display:flex;gap:14px;font-size:12px;font-weight:700;color:#5E7B6F;">
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:3px;background:#10B981;"></span>완료</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:3px;background:#FB923C;"></span>진행 중</span>
+              <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:3px;background:#C7D2CD;"></span>잠김</span>
+            </div>
+          </div>
+          <div style="margin-top:20px;position:relative;">
+            <sc-for list="{{ trail }}" as="row" hint-placeholder-count="6">
+              <div style="display:flex;gap:14px;align-items:stretch;">
+                <div style="position:relative;width:46px;flex:none;">
+                  <div style="{{ row.topHalfStyle }}"></div>
+                  <div style="{{ row.botHalfStyle }}"></div>
+                  <sc-if value="{{ row.isTier }}" hint-placeholder-val="{{ false }}">
+                    <div style="{{ row.markerStyle }}"></div>
+                  </sc-if>
+                  <sc-if value="{{ row.isNode }}" hint-placeholder-val="{{ true }}">
+                    <div style="{{ row.dotStyle }}">
+                      <sc-if value="{{ row.isDone }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg></sc-if>
+                      <sc-if value="{{ row.isCurrent }}" hint-placeholder-val="{{ false }}"><span style="width:11px;height:11px;border-radius:50%;background:#FB923C;"></span></sc-if>
+                      <sc-if value="{{ row.isLocked }}" hint-placeholder-val="{{ true }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9AA8A2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ row.isTier }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;min-height:42px;padding-bottom:6px;">
+                    <span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;color:#0E9A6E;background:#E7F8F1;padding:6px 13px;border-radius:999px;letter-spacing:.04em;">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="9" r="3"/><path d="M18 12v0a3 3 0 0 1-3 3H9M6 9v6"/></svg>
+                      {{ row.label }}
+                    </span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ row.isNode }}" hint-placeholder-val="{{ true }}">
+                  <div style="flex:1;min-width:0;padding-bottom:14px;">
+                    <div style="{{ row.rowCardStyle }}">
+                      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                        <div style="min-width:0;">
+                          <div style="{{ row.titleStyle }}">{{ row.title }}</div>
+                          <div style="{{ row.metaStyle }}">{{ row.meta }}</div>
+                        </div>
+                        <span style="{{ row.badgeStyle }}">{{ row.statusLabel }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:20px;">
+          <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:22px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+              <span style="font-size:12px;font-weight:800;color:#C2410C;background:#FFE7D1;padding:4px 10px;border-radius:999px;">현재 과제</span>
+              <span style="font-size:12px;font-weight:700;color:#B91C1C;background:#FEE2E2;padding:4px 10px;border-radius:999px;">D-3</span>
+            </div>
+            <h3 style="margin:0 0 7px;font-size:17px;font-weight:800;letter-spacing:-.02em;">텍스처 매핑 구현하기</h3>
+            <p style="margin:0 0 16px;font-size:13.5px;line-height:1.6;color:#5E7B6F;">UV 좌표로 메시 표면에 이미지를 입히고, 경계 처리와 필터링까지 직접 구현합니다.</p>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:#0E9A6E;background:#ECFBF4;padding:9px 12px;border-radius:11px;margin-bottom:16px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              리뷰 진행 중 · 5건 지적
+            </div>
+            <div style="display:flex;gap:9px;">
+              <button onClick="{{ goAsgn }}" style="flex:1;background:#16241F;color:#fff;border:none;border-radius:11px;padding:11px;font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="background:#28332E;">과제 상세</button>
+              <button onClick="{{ goReview }}" style="flex:1;background:#fff;color:#16241F;border:1.5px solid #DCE5E1;border-radius:11px;padding:11px;font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="border-color:#10B981;color:#0E9A6E;">리뷰 보기</button>
+            </div>
+          </section>
+
+          <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:22px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+            <h3 style="margin:0 0 14px;font-size:16px;font-weight:800;letter-spacing:-.02em;">다음 할 일</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ todos }}" as="todo" hint-placeholder-count="3">
+                <button onClick="{{ todo.go }}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#F8FAF9;border:1px solid #EEF2F0;border-radius:12px;padding:12px 13px;cursor:pointer;" style-hover="background:#ECFBF4;border-color:#C2E9D6;">
+                  <span style="width:18px;height:18px;border-radius:50%;border:2px solid #C7D2CD;flex:none;"></span>
+                  <span style="flex:1;min-width:0;">
+                    <span style="display:block;font-size:14px;font-weight:700;color:#28332E;">{{ todo.text }}</span>
+                    <span style="display:block;font-size:12px;color:#8A9A93;font-weight:600;margin-top:2px;">{{ todo.meta }}</span>
+                  </span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B7C2BD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ showAsgn }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="과제 상세" style="max-width:980px;">
+      <div style="font-size:13px;font-weight:700;color:#8A9A93;margin-bottom:6px;">그래픽스 도장 · 셰이딩</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:24px;">
+        <h1 style="margin:0;font-size:clamp(23px,3vw,30px);font-weight:800;letter-spacing:-.025em;">텍스처 매핑 구현하기</h1>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:12.5px;font-weight:800;color:#C2410C;background:#FFE7D1;padding:6px 12px;border-radius:999px;">현재 과제</span>
+          <span style="font-size:12.5px;font-weight:700;color:#B91C1C;background:#FEE2E2;padding:6px 12px;border-radius:999px;">D-3</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;">
+        <div style="flex:2 1 440px;display:flex;flex-direction:column;gap:20px;">
+          <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+            <h2 style="margin:0 0 12px;font-size:16px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:18px;border-radius:3px;background:#10B981;"></span>목표</h2>
+            <p style="margin:0;font-size:15px;line-height:1.7;color:#28332E;">메시의 각 정점에 부여된 UV 좌표를 이용해 표면에 이미지를 입힙니다. 좌표가 0~1 범위를 벗어날 때의 <strong>래핑 모드(repeat / clamp)</strong>를 직접 처리하고, 확대·축소 시의 필터링까지 구현해 경계에서 깨짐이 없도록 만드세요.</p>
+          </section>
+
+          <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+            <h2 style="margin:0 0 14px;font-size:16px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;"><span style="width:6px;height:18px;border-radius:3px;background:#FB923C;"></span>제약 — 고정 조건</h2>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{ constraints }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;gap:11px;align-items:flex-start;background:#FAFBFA;border:1px solid #EEF2F0;border-radius:12px;padding:12px 14px;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                  <span style="font-size:14px;line-height:1.5;color:#28332E;font-weight:600;">{{ c }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p style="margin:14px 0 0;font-size:12.5px;color:#8A9A93;line-height:1.55;">고정 조건은 리뷰 시 반드시 검증돼요. 조건을 우회하면 자동으로 검증 실패 처리됩니다.</p>
+          </section>
+        </div>
+
+        <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:20px;">
+          <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:22px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+            <h2 style="margin:0 0 12px;font-size:15px;font-weight:800;letter-spacing:-.02em;">기한</h2>
+            <div style="font-size:24px;font-weight:800;letter-spacing:-.02em;">6월 26일 <span style="font-size:14px;color:#8A9A93;font-weight:700;">금</span></div>
+            <div style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:800;color:#B91C1C;background:#FEE2E2;padding:6px 12px;border-radius:999px;">3일 남음</div>
+          </section>
+          <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:22px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+            <h2 style="margin:0 0 14px;font-size:15px;font-weight:800;letter-spacing:-.02em;">연결된 링크</h2>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <a style="display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;background:#F8FAF9;border:1px solid #EEF2F0;cursor:pointer;text-decoration:none;color:inherit;" style-hover="background:#ECFBF4;border-color:#C2E9D6;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#16241F"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 3.9-1.4 6.8-5.2 6.8-9.7C22 6.6 17.5 2 12 2z"/></svg>
+                <span style="flex:1;"><span style="display:block;font-size:14px;font-weight:700;">레포지토리</span><span style="display:block;font-size:12px;color:#8A9A93;font-weight:600;margin-top:1px;">toresen/gfx-texture</span></span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B7C2BD" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+              </a>
+              <a style="display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;background:#F8FAF9;border:1px solid #EEF2F0;cursor:pointer;text-decoration:none;color:inherit;" style-hover="background:#ECFBF4;border-color:#C2E9D6;">
+                <span style="width:18px;height:18px;border-radius:50%;border:2px solid #16A34A;flex:none;"></span>
+                <span style="flex:1;"><span style="display:block;font-size:14px;font-weight:700;">Issue #42</span><span style="display:block;font-size:12px;color:#8A9A93;font-weight:600;margin-top:1px;">과제 요구사항</span></span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B7C2BD" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+              </a>
+              <a style="display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;background:#F8FAF9;border:1px solid #EEF2F0;cursor:pointer;text-decoration:none;color:inherit;" style-hover="background:#ECFBF4;border-color:#C2E9D6;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="9" r="3"/><path d="M18 12v1a3 3 0 0 1-3 3H9M6 9v6"/></svg>
+                <span style="flex:1;"><span style="display:block;font-size:14px;font-weight:700;">PR #7</span><span style="display:block;font-size:12px;color:#8A9A93;font-weight:600;margin-top:1px;">검토 요청됨 · 리뷰 중</span></span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#B7C2BD" stroke-width="2.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ showReview }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="리뷰" style="max-width:1000px;display:flex;flex-direction:column;gap:22px;">
+      <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:22px 24px;box-shadow:0 1px 2px rgba(16,40,30,.04);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <image-slot id="toresen-trainer" shape="circle" placeholder="사진" style="width:54px;height:54px;flex:none;border:1px solid #EAEFED;"></image-slot>
+          <div>
+            <div style="font-size:17px;font-weight:800;letter-spacing:-.02em;">{{ name }}</div>
+            <div style="font-size:13px;color:#5E7B6F;font-weight:600;margin-top:2px;">깐깐한 시니어 트레이너 · PR #7 검토</div>
+          </div>
+        </div>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:#B91C1C;background:#FEE2E2;padding:8px 14px;border-radius:999px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#EF4444;"></span>검증 실패 · 5건 지적
+        </span>
+      </section>
+
+      <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
+          <h2 style="margin:0;font-size:16px;font-weight:800;letter-spacing:-.02em;">결과물 비교</h2>
+          <span style="font-size:11.5px;font-weight:700;color:#8A9A93;background:#F1F5F3;padding:5px 11px;border-radius:999px;">시각 결과물 과제에서만 표시</span>
+        </div>
+        <p style="margin:0 0 18px;font-size:12.5px;color:#8A9A93;">정답 렌더링과 내 렌더링을 나란히 비교하고 유사도를 확인하세요. 이미지를 끌어다 놓을 수 있어요.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:stretch;">
+          <div style="flex:1 1 220px;">
+            <div style="font-size:12.5px;font-weight:800;color:#0E9A6E;margin-bottom:8px;">정답 결과</div>
+            <image-slot id="toresen-answer" shape="rounded" radius="14" placeholder="정답 렌더링" style="width:100%;height:180px;border:1px solid #EAEFED;"></image-slot>
+          </div>
+          <div style="flex:1 1 220px;">
+            <div style="font-size:12.5px;font-weight:800;color:#C2410C;margin-bottom:8px;">내 결과</div>
+            <image-slot id="toresen-mine" shape="rounded" radius="14" placeholder="내 렌더링 끌어다 놓기" style="width:100%;height:180px;border:1px solid #EAEFED;"></image-slot>
+          </div>
+          <div style="flex:1 1 160px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#FAFBFA;border:1px solid #EEF2F0;border-radius:14px;padding:16px;">
+            <div style="width:96px;height:96px;border-radius:50%;background:conic-gradient(#10B981 0% 87%,#E6ECE9 87% 100%);display:flex;align-items:center;justify-content:center;">
+              <div style="width:74px;height:74px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <span style="font-size:24px;font-weight:800;letter-spacing:-.02em;color:#16241F;">87%</span>
+              </div>
+            </div>
+            <div style="font-size:12.5px;font-weight:700;color:#5E7B6F;margin-top:11px;">유사도</div>
+            <div style="font-size:11.5px;color:#B45309;font-weight:700;margin-top:3px;">통과까지 90%</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+        <h2 style="margin:0 0 4px;font-size:16px;font-weight:800;letter-spacing:-.02em;">지적 사항 5건</h2>
+        <p style="margin:0 0 16px;font-size:12.5px;color:#8A9A93;">각 항목을 펼치면 근거가 된 코드 인용을 볼 수 있어요.</p>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <sc-for list="{{ reviewItems }}" as="item" hint-placeholder-count="5">
+            <div style="border:1px solid #EAEFED;border-radius:14px;overflow:hidden;">
+              <div onClick="{{ item.onToggle }}" style="display:flex;gap:13px;align-items:flex-start;padding:15px 16px;cursor:pointer;" style-hover="background:#FAFBFA;">
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:7px;">
+                    <span style="{{ item.catStyle }}">{{ item.cat }}</span>
+                    <span style="{{ item.sevStyle }}">{{ item.sevLabel }}</span>
+                    <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:600;color:#6B7772;">{{ item.file }} · {{ item.line }}</span>
+                  </div>
+                  <div style="font-size:14.5px;line-height:1.6;color:#28332E;">{{ item.msg }}</div>
+                </div>
+                <span style="font-size:13px;color:#A9B5AF;margin-top:2px;">{{ item.caret }}</span>
+              </div>
+              <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+                <div style="border-top:1px solid #EAEFED;">
+                  <div style="padding:8px 16px;background:#F8FAF9;font-size:11.5px;font-weight:700;color:#8A9A93;">근거 코드 인용</div>
+                  <pre style="margin:0;background:#0F1714;color:#D7E4DD;padding:15px 16px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.65;white-space:pre-wrap;overflow-x:auto;">{{ item.code }}</pre>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px;">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:#FEE2E2;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
+          <h2 style="margin:0;font-size:17px;font-weight:800;letter-spacing:-.02em;">반려 — 수정 후 다시 요청해 주세요</h2>
+        </div>
+        <p style="margin:0 0 18px;font-size:14px;line-height:1.65;color:#5E7B6F;">지적 5건 중 <strong style="color:#B91C1C;">심각도 높음 1건</strong>이 남아 있어요. 반영해서 PR을 다시 올리면 같은 페르소나가 재검증할게요. 결과 유사도도 90% 이상으로 끌어올려야 통과돼요.</p>
+        <div style="display:flex;gap:11px;flex-wrap:wrap;">
+          <button style="background:#10B981;color:#fff;border:none;border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(16,185,129,.28);" style-hover="background:#0E9A6E;">수정 후 다시 요청</button>
+          <button style="background:#fff;color:#16241F;border:1.5px solid #DCE5E1;border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;" style-hover="border-color:#94A3B8;">직접 머지</button>
+        </div>
+        <p style="margin:14px 0 0;font-size:12px;color:#A9B5AF;line-height:1.55;">Toresen은 코드를 대신 작성하지 않아요. 직접 머지는 리뷰 통과 없이 진행되며, 본인 판단과 책임으로 결정됩니다.</p>
+      </section>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ showPersona }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="페르소나" style="max-width:980px;">
+      <h1 style="margin:0 0 5px;font-size:clamp(23px,3vw,30px);font-weight:800;letter-spacing:-.025em;">트레이너 커스터마이즈</h1>
+      <p style="margin:0 0 24px;color:#5E7B6F;font-size:15px;">나를 가르칠 시니어 트레이너를 직접 만들어요. 이름·사진·말투는 언제든 바꿀 수 있어요.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;">
+        <section style="flex:1.3 1 380px;background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);display:flex;flex-direction:column;gap:24px;">
+          <div>
+            <label style="display:block;font-size:13.5px;font-weight:800;margin-bottom:9px;">트레이너 이름</label>
+            <input value="{{ name }}" onChange="{{ onName }}" style="width:100%;font-family:inherit;font-size:15px;font-weight:600;color:#16241F;padding:12px 14px;border:1.5px solid #DCE5E1;border-radius:12px;outline:none;background:#FAFBFA;" style-focus="border-color:#10B981;background:#fff;"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:13.5px;font-weight:800;margin-bottom:11px;">프로필 사진</label>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+              <image-slot id="toresen-trainer" shape="circle" placeholder="사진 추가" style="width:88px;height:88px;flex:none;border:1px solid #EAEFED;"></image-slot>
+              <div style="font-size:13px;line-height:1.6;color:#8A9A93;font-weight:600;">이미지를 끌어다 놓거나 클릭해 업로드하세요.<br/>정사각형 사진이 가장 잘 어울려요.</div>
+            </div>
+          </div>
+          <div>
+            <label style="display:block;font-size:13.5px;font-weight:800;margin-bottom:11px;">말투</label>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;">
+              <sc-for list="{{ tones }}" as="tone" hint-placeholder-count="5">
+                <div onClick="{{ tone.onSelect }}" style="{{ tone.style }}">
+                  <div style="{{ tone.labelStyle }}">{{ tone.label }}</div>
+                  <div style="font-size:12.5px;color:#8A9A93;font-weight:600;margin-top:3px;">{{ tone.desc }}</div>
+                </div>
+              </sc-for>
+              <div onClick="{{ customTone.onSelect }}" style="{{ customTone.style }}">
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ customTone.iconColor }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+                  <span style="{{ customTone.labelStyle }}">직접 설정</span>
+                </div>
+                <div style="font-size:12.5px;color:#8A9A93;font-weight:600;margin-top:3px;">나만의 말투를 입력</div>
+              </div>
+            </div>
+            <sc-if value="{{ isCustomTone }}" hint-placeholder-val="{{ false }}">
+              <input value="{{ customText }}" onChange="{{ onCustomTone }}" placeholder="예: 츤데레처럼 — 칭찬은 짧게, 지적은 날카롭게" style="margin-top:11px;width:100%;font-family:inherit;font-size:14px;color:#16241F;padding:12px 14px;border:1.5px solid #10B981;border-radius:12px;outline:none;background:#fff;"/>
+            </sc-if>
+          </div>
+        </section>
+
+        <section style="flex:1 1 280px;background:#fff;border:1px solid #EAEFED;border-radius:20px;padding:24px;box-shadow:0 1px 2px rgba(16,40,30,.04);">
+          <div style="font-size:12px;font-weight:800;color:#8A9A93;letter-spacing:.04em;margin-bottom:16px;">미리보기</div>
+          <div style="display:flex;align-items:center;gap:13px;margin-bottom:18px;">
+            <image-slot id="toresen-trainer" shape="circle" placeholder="사진" style="width:54px;height:54px;flex:none;border:1px solid #EAEFED;"></image-slot>
+            <div>
+              <div style="font-size:16px;font-weight:800;letter-spacing:-.02em;">{{ name }}</div>
+              <div style="font-size:12.5px;color:#5E7B6F;font-weight:600;margin-top:2px;">시니어 트레이너</div>
+            </div>
+          </div>
+          <div style="position:relative;background:#F8FAF9;border:1px solid #EEF2F0;border-radius:16px;border-top-left-radius:4px;padding:16px 18px;">
+            <div style="display:flex;gap:7px;margin-bottom:9px;">
+              <span style="font-size:11.5px;font-weight:700;color:#1D4ED8;background:#E3ECFE;padding:3px 9px;border-radius:999px;">개념</span>
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px;font-weight:600;color:#6B7772;align-self:center;">texture.cpp · L42</span>
+            </div>
+            <p style="margin:0;font-size:14px;line-height:1.65;color:#28332E;">{{ previewText }}</p>
+          </div>
+          <p style="margin:14px 0 0;font-size:12px;color:#A9B5AF;line-height:1.55;">말투를 바꾸면 같은 지적도 다른 톤으로 전달돼요. 내용(근거·코드 인용)은 그대로예요.</p>
+        </section>
+      </div>
+    </div>
+    </sc-if>
+
+  </main>
+</div>
+
+<sc-if value="{{ onboarding }}" hint-placeholder-val="{{ true }}">
+<div style="position:fixed;inset:0;z-index:50;background:#EEF3F1;display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto;">
+  <div style="position:absolute;top:-80px;right:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#D4F5E5,transparent 70%);"></div>
+  <div style="position:absolute;bottom:-70px;left:-50px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,#FFE7D1,transparent 70%);"></div>
+  <div style="position:relative;width:100%;max-width:600px;background:#fff;border-radius:26px;box-shadow:0 30px 70px rgba(16,40,30,.18);padding:34px 36px 26px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#10B981,#34D399);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;">T</div>
+        <span style="font-size:15px;font-weight:800;letter-spacing:-.02em;">Toresen</span>
+      </div>
+      <span style="font-size:13px;font-weight:700;color:#8A9A93;">{{ obCounter }}</span>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:26px;">
+      <span style="{{ dot0 }}"></span><span style="{{ dot1 }}"></span><span style="{{ dot2 }}"></span><span style="{{ dot3 }}"></span>
+    </div>
+
+    <sc-if value="{{ isOb0 }}" hint-placeholder-val="{{ true }}">
+      <div style="width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#10B981,#34D399);display:flex;align-items:center;justify-content:center;margin-bottom:18px;box-shadow:0 10px 24px rgba(16,185,129,.3);">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.8L20 8l-4 4.2.9 6L12 15.3 7.1 18.2 8 12.2 4 8l5.6-.2z"/></svg>
+      </div>
+      <h2 style="margin:0 0 10px;font-size:24px;font-weight:800;letter-spacing:-.025em;">Toresen에 오신 걸 환영해요</h2>
+      <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#5E7B6F;">AI 시니어 트레이너와 함께하는 자기주도 코딩 도장이에요. <strong style="color:#28332E;">코드는 직접 짜고</strong>, 리뷰와 다음 과제는 Toresen이 챙겨드려요. 처음이어도 차근차근 안내할게요.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:11px;align-items:center;"><span style="width:30px;height:30px;border-radius:9px;background:#ECFBF4;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span style="font-size:14px;font-weight:600;color:#28332E;">깐깐한 시니어 코드 리뷰</span></div>
+        <div style="display:flex;gap:11px;align-items:center;"><span style="width:30px;height:30px;border-radius:9px;background:#FFF1E6;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><span style="font-size:14px;font-weight:600;color:#28332E;">단계별 과제와 명확한 통과 기준</span></div>
+        <div style="display:flex;gap:11px;align-items:center;"><span style="width:30px;height:30px;border-radius:9px;background:#E3ECFE;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/></svg></span><span style="font-size:14px;font-weight:600;color:#28332E;">스킬 트리로 성장 한눈에 확인</span></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOb1 }}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin:0 0 10px;font-size:23px;font-weight:800;letter-spacing:-.025em;">GitHub 계정을 연결해 주세요</h2>
+      <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#5E7B6F;">Toresen은 여러분이 올린 <strong style="color:#28332E;">PR</strong>을 읽고 리뷰해요. 그래서 GitHub 계정 연결이 필요합니다.</p>
+      <button style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#16241F;color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;" style-hover="background:#28332E;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.5 2 2 6.6 2 12.3c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 3.9-1.4 6.8-5.2 6.8-9.7C22 6.6 17.5 2 12 2z"/></svg>
+        GitHub로 연결하기
+      </button>
+      <div style="display:flex;gap:11px;align-items:flex-start;margin-top:18px;background:#ECFBF4;border:1px solid #C2E9D6;border-radius:14px;padding:14px 16px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E9A6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#28332E;"><strong>PR(Pull Request)이 뭔지 몰라도 괜찮아요.</strong> 내가 바꾼 코드 묶음을 리뷰어에게 보여주는 통로예요. 연결만 해두면 다음 단계에서 차근차근 알려드릴게요.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOb2 }}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin:0 0 10px;font-size:23px;font-weight:800;letter-spacing:-.025em;">내 컴퓨터와 연결하기</h2>
+      <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#5E7B6F;"><strong style="color:#28332E;">CLI</strong>는 ‘명령어로 컴퓨터에 말을 거는 창구’예요. 아래 한 줄을 터미널에 붙여넣으면 Toresen과 연결됩니다.</p>
+      <div style="display:flex;align-items:center;gap:10px;background:#0F1714;border-radius:13px;padding:14px 16px;">
+        <span style="flex:1;font-family:ui-monospace,Menlo,monospace;font-size:13.5px;color:#D7E4DD;overflow-x:auto;white-space:nowrap;">npx toresen connect --token tk_live_••••</span>
+        <button onClick="{{ copyCmd }}" style="flex:none;background:#243029;color:#9FE9C7;border:none;border-radius:9px;padding:7px 13px;font-size:12.5px;font-weight:700;cursor:pointer;" style-hover="background:#2E3D34;">{{ copyLabel }}</button>
+      </div>
+      <div style="display:flex;gap:11px;align-items:flex-start;margin-top:16px;background:#FFF1E6;border:1px solid #FBD9B8;border-radius:14px;padding:14px 16px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <p style="margin:0;font-size:13.5px;line-height:1.6;color:#28332E;"><strong>토큰은 ‘Toresen이 나를 알아보는 비밀 열쇠’예요.</strong> 위 명령어에 자동으로 들어가 있어요. 다른 사람에게는 보여주지 마세요.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOb3 }}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin:0 0 10px;font-size:23px;font-weight:800;letter-spacing:-.025em;">트레이너를 골라보세요</h2>
+      <p style="margin:0 0 18px;font-size:15px;line-height:1.7;color:#5E7B6F;">원하는 말투를 고르면 그 톤으로 리뷰를 받아요. 나중에 <strong style="color:#28332E;">트레이너 설정</strong>에서 언제든 바꿀 수 있어요.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:8px;">
+        <sc-for list="{{ tones }}" as="tone" hint-placeholder-count="5">
+          <div onClick="{{ tone.onSelect }}" style="{{ tone.style }}">
+            <div style="{{ tone.labelStyle }}">{{ tone.label }}</div>
+            <div style="font-size:12px;color:#8A9A93;font-weight:600;margin-top:3px;">{{ tone.desc }}</div>
+          </div>
+        </sc-for>
+        <div onClick="{{ customTone.onSelect }}" style="{{ customTone.style }}">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ customTone.iconColor }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+            <span style="{{ customTone.labelStyle }}">직접 설정</span>
+          </div>
+          <div style="font-size:12px;color:#8A9A93;font-weight:600;margin-top:3px;">나만의 말투를 입력</div>
+        </div>
+      </div>
+      <sc-if value="{{ isCustomTone }}" hint-placeholder-val="{{ false }}">
+        <input value="{{ customText }}" onChange="{{ onCustomTone }}" placeholder="예: 츤데레처럼 — 칭찬은 짧게, 지적은 날카롭게" style="margin-bottom:8px;width:100%;font-family:inherit;font-size:14px;color:#16241F;padding:12px 14px;border:1.5px solid #10B981;border-radius:12px;outline:none;background:#fff;"/>
+      </sc-if>
+      <p style="margin:14px 0 0;font-size:13.5px;color:#0E9A6E;font-weight:700;">준비 끝! ‘시작하기’를 누르면 첫 과제가 발급돼요.</p>
+    </sc-if>
+
+    <div style="display:flex;align-items:center;margin-top:28px;">
+      <div style="flex:1;">
+        <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ obPrev }}" style="background:transparent;border:none;color:#8A9A93;font-size:14.5px;font-weight:700;cursor:pointer;padding:10px 4px;" style-hover="color:#5B6B65;">이전</button>
+        </sc-if>
+      </div>
+      <button onClick="{{ obNext }}" style="background:#10B981;color:#fff;border:none;border-radius:12px;padding:13px 30px;font-size:14.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(16,185,129,.28);" style-hover="background:#0E9A6E;">{{ obNextLabel }}</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:820}}">
+class Component extends DCLogic {
+  state = {
+    screen: 'dashboard',
+    onboarding: true,
+    obStep: 0,
+    expanded: { r1: true },
+    tone: 'strict',
+    name: '시니어 트레이너 K',
+    customText: '',
+    copied: false,
+  };
+
+  nodeVisual(status) {
+    const dotBase = 'position:absolute;left:50%;top:24px;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;z-index:2;';
+    if (status === 'done') return {
+      rowCard: 'background:#fff;border:1px solid #EAEFED;border-radius:14px;padding:13px 16px;box-shadow:0 1px 2px rgba(16,40,30,.04);',
+      dot: dotBase + 'width:30px;height:30px;border-radius:50%;background:#10B981;box-shadow:0 0 0 4px #fff,0 0 0 6px #D4F5E5;',
+      badge: 'font-size:11.5px;font-weight:800;color:#0E9A6E;background:#D4F5E5;padding:4px 11px;border-radius:999px;flex:none;',
+      title: 'font-size:14.5px;font-weight:800;color:#16241F;line-height:1.35;letter-spacing:-.01em;',
+      meta: 'font-size:12px;color:#5E7B6F;font-weight:600;margin-top:2px;',
+      label: '완료',
+    };
+    if (status === 'current') return {
+      rowCard: 'background:#fff;border:2px solid #FB923C;border-radius:14px;padding:12px 15px;box-shadow:0 10px 22px rgba(251,146,60,.16);',
+      dot: dotBase + 'width:32px;height:32px;border-radius:50%;background:#fff;border:3px solid #FB923C;box-shadow:0 0 0 4px #fff,0 0 0 7px #FFE7D1;',
+      badge: 'font-size:11.5px;font-weight:800;color:#C2410C;background:#FFE7D1;padding:4px 11px;border-radius:999px;flex:none;',
+      title: 'font-size:14.5px;font-weight:800;color:#16241F;line-height:1.35;letter-spacing:-.01em;',
+      meta: 'font-size:12px;color:#C2410C;font-weight:700;margin-top:2px;',
+      label: '진행 중',
+    };
+    return {
+      rowCard: 'background:#F6F8F7;border:1px solid #E6ECE9;border-radius:14px;padding:13px 16px;',
+      dot: dotBase + 'width:24px;height:24px;border-radius:50%;background:#EEF2F0;border:2px solid #D7E0DC;box-shadow:0 0 0 4px #fff;',
+      badge: 'font-size:11.5px;font-weight:800;color:#9AA8A2;background:#EBF0EE;padding:4px 11px;border-radius:999px;flex:none;',
+      title: 'font-size:14.5px;font-weight:700;color:#9AA8A2;line-height:1.35;letter-spacing:-.01em;',
+      meta: 'font-size:12px;color:#A9B5AF;font-weight:600;margin-top:2px;',
+      label: '잠김',
+    };
+  }
+
+  mkNode(title, meta, status) {
+    const v = this.nodeVisual(status);
+    return {
+      title, meta, statusLabel: v.label,
+      rowCardStyle: v.rowCard, dotStyle: v.dot, badgeStyle: v.badge, titleStyle: v.title, metaStyle: v.meta,
+      isDone: status === 'done', isCurrent: status === 'current', isLocked: status === 'locked',
+    };
+  }
+
+  buildTrail(tiers) {
+    const GREEN = '#10B981', GRAY = '#DCE5E1';
+    const flat = [];
+    tiers.forEach(t => { flat.push({ kind: 'tier', label: t.label }); t.nodes.forEach(n => flat.push({ kind: 'node', node: n })); });
+    let curPos = flat.findIndex(it => it.kind === 'node' && it.node.isCurrent);
+    if (curPos < 0) curPos = flat.length;
+    return flat.map((it, pos) => {
+      const isFirst = pos === 0, isLast = pos === flat.length - 1;
+      const isTier = it.kind === 'tier';
+      const dotY = isTier ? '50%' : '24px';
+      const topColor = pos <= curPos ? GREEN : GRAY;
+      const botColor = pos < curPos ? GREEN : GRAY;
+      const topHalfStyle = isFirst ? 'display:none;' : 'position:absolute;left:50%;top:0;height:' + dotY + ';width:3px;transform:translateX(-50%);background:' + topColor + ';border-radius:3px;';
+      const botHalfStyle = isLast ? 'display:none;' : 'position:absolute;left:50%;top:' + dotY + ';bottom:0;width:3px;transform:translateX(-50%);background:' + botColor + ';border-radius:3px;';
+      const base = { isTier, isNode: !isTier, topHalfStyle, botHalfStyle };
+      if (isTier) return { ...base, label: it.label,
+        markerStyle: 'position:absolute;left:50%;top:50%;width:12px;height:12px;background:#fff;border:2.5px solid ' + (pos <= curPos ? '#0E9A6E' : '#C2CCC7') + ';border-radius:3px;transform:translate(-50%,-50%) rotate(45deg);z-index:2;' };
+      return { ...base, ...it.node };
+    });
+  }
+
+  catColor(cat) {
+    const m = {
+      '개념': ['#1D4ED8', '#E3ECFE'],
+      '컨벤션': ['#6D28D9', '#EDE6FE'],
+      '아키텍처': ['#0F766E', '#D2F1EC'],
+      '커밋': ['#B45309', '#FCEACF'],
+      '성능': ['#BE185D', '#FCE2EE'],
+    };
+    return m[cat] || ['#475569', '#EEF2F1'];
+  }
+
+  sevStyle(sev) {
+    const m = { '높음': ['#B91C1C', '#FEE2E2'], '보통': ['#B45309', '#FEF0D9'], '낮음': ['#475569', '#EAEEEC'] };
+    const a = m[sev] || m['낮음'];
+    return 'font-size:11.5px;font-weight:700;color:' + a[0] + ';background:' + a[1] + ';padding:3px 9px;border-radius:999px;';
+  }
+
+  mkReview(id, file, line, cat, sev, msg, code) {
+    const c = this.catColor(cat);
+    return {
+      id, file, line, cat, msg, code,
+      catStyle: 'font-size:11.5px;font-weight:700;color:' + c[0] + ';background:' + c[1] + ';padding:3px 9px;border-radius:999px;',
+      sevStyle: this.sevStyle(sev),
+      sevLabel: '심각도 ' + sev,
+      open: !!this.state.expanded[id],
+      caret: this.state.expanded[id] ? '접기 ▲' : '펼치기 ▼',
+      onToggle: () => this.setState(st => ({ expanded: { ...st.expanded, [id]: !st.expanded[id] } })),
+    };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const navBase = 'display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;cursor:pointer;transition:background .15s,color .15s;';
+    const nav = (id) => navBase + (s.screen === id ? 'background:#E7F8F1;color:#0E9A6E;' : 'color:#5B6B65;');
+
+    const tiers = [
+      { label: '기초', nodes: [
+        this.mkNode('좌표 변환', '레슨 3 · 통과', 'done'),
+        this.mkNode('프레임버퍼', '레슨 2 · 통과', 'done'),
+        this.mkNode('삼각형 래스터화', '레슨 4 · 통과', 'done'),
+      ] },
+      { label: '셰이딩', nodes: [
+        this.mkNode('셰이더 기초', '레슨 3 · 통과', 'done'),
+        this.mkNode('텍스처 매핑', '레슨 4 · 리뷰 중', 'current'),
+        this.mkNode('라이팅 모델', '레슨 5', 'locked'),
+      ] },
+      { label: '심화', nodes: [
+        this.mkNode('그림자 매핑', '레슨 4', 'locked'),
+        this.mkNode('후처리 효과', '레슨 3', 'locked'),
+        this.mkNode('렌더 최적화', '레슨 5', 'locked'),
+      ] },
+    ];
+    const trail = this.buildTrail(tiers);
+
+    const todos = [
+      { text: '리뷰 지적 3건 반영하기', meta: '리뷰 화면', go: () => this.setState({ screen: 'review' }) },
+      { text: '수정 후 PR 다시 요청하기', meta: 'PR #7', go: () => this.setState({ screen: 'review' }) },
+      { text: '결과 유사도 90% 이상으로 올리기', meta: '현재 87%', go: () => this.setState({ screen: 'review' }) },
+    ];
+
+    const reviewItems = [
+      this.mkReview('r1', 'src/render/texture.cpp', 'L42', '개념', '높음', 'UV 좌표가 [0,1] 범위를 벗어날 때의 처리가 없어요. 래핑 모드(repeat/clamp)를 정하지 않으면 텍스처 경계에서 이미지가 깨져 보입니다.', 'vec4 color = sample(tex, uv);\n// uv 값이 1.0을 넘어가면 어떻게 되나요?'),
+      this.mkReview('r2', 'src/render/texture.cpp', 'L88', '성능', '보통', '반복문 안에서 매번 텍스처 핸들을 새로 조회하고 있어요. 반복문 밖으로 한 번만 빼면 불필요한 조회를 크게 줄일 수 있습니다.', 'for (int i = 0; i < n; i++) {\n  auto h = lookupTexture(name); // 매 반복마다 조회\n  draw(h);\n}'),
+      this.mkReview('r3', 'src/main.cpp', 'L13', '아키텍처', '보통', '렌더링과 파일 입출력이 한 함수에 섞여 있어요. 역할을 나누면 나중에 테스트하거나 재사용하기 훨씬 쉬워집니다.', 'void run() {\n  loadPNG("in.png");\n  drawScene();\n  savePNG("out.png");\n}'),
+      this.mkReview('r4', '커밋 기록', '4건', '커밋', '낮음', '"wip", "fix2" 같은 메시지가 보여요. 무엇을 왜 바꿨는지 한 줄로 남겨주면 변경 의도를 빠르게 파악할 수 있어요.', 'fix2\nwip\nasdf\nupdate'),
+      this.mkReview('r5', 'src/render/texture.cpp', 'L5', '컨벤션', '낮음', '함수 이름에 camelCase와 snake_case가 섞여 있어요. 한 가지 규칙으로 통일해 주세요.', 'void Draw_mesh();\nvoid drawLine();'),
+    ];
+
+    const constraints = [
+      '외부 텍스처 로딩 라이브러리 사용 금지 (직접 구현)',
+      '셰이더는 GLSL로 작성',
+      '1080p 기준 60fps 유지',
+      '커밋은 기능 단위로 분리',
+    ];
+
+    const tones = [
+      { id: 'strict', label: '깐깐하게', desc: '근거를 코드로, 빈틈 없이' },
+      { id: 'friendly', label: '친근하게', desc: '응원과 함께 부드럽게' },
+      { id: 'concise', label: '간결하게', desc: '핵심만 짧게' },
+      { id: 'passionate', label: '열정적으로', desc: '동기부여 가득' },
+      { id: 'mentor', label: '멘토처럼', desc: '차분하게 이유까지 설명' },
+    ].map(t => ({
+      id: t.id, label: t.label, desc: t.desc,
+      style: 'cursor:pointer;border-radius:14px;padding:14px 15px;border:1.5px solid ' + (s.tone === t.id ? '#10B981' : '#E6ECE9') + ';background:' + (s.tone === t.id ? '#ECFBF4' : '#FFFFFF') + ';transition:all .15s;',
+      labelStyle: 'font-size:14.5px;font-weight:800;color:' + (s.tone === t.id ? '#0E9A6E' : '#16241F') + ';',
+      onSelect: () => this.setState({ tone: t.id }),
+    }));
+
+    const previews = {
+      strict: '이 부분은 아직 통과시킬 수 없습니다. L42의 경계 조건 처리가 빠져 있어요. 근거를 코드로 짚어드릴 테니, 래핑 모드를 명시하고 다시 올려주세요.',
+      friendly: '거의 다 왔어요! L42에서 경계 조건만 한 번 더 챙기면 정말 깔끔해질 거예요. 조금만 더 다듬어 볼까요?',
+      concise: 'L42: 경계 조건 누락. 래핑 모드 명시 후 재요청.',
+      passionate: '좋은 시도예요! 다만 여기서 한 끗이 실력을 가릅니다. L42 경계 조건, 지금 바로 잡아봅시다. 할 수 있어요!',
+      mentor: 'L42를 보면 UV가 1.0을 넘는 경우가 처리되지 않았어요. 왜 중요하냐면, 그 순간 텍스처 샘플링이 정의되지 않아 경계가 깨지거든요. 래핑 모드부터 정해볼까요.',
+      custom: s.customText
+        ? '"' + s.customText + '" — 이 톤으로 전달돼요. L42의 경계 조건을 다시 확인해 주세요.'
+        : '위에 원하는 말투를 입력하면, 그 톤으로 리뷰가 전달돼요. (내용·근거는 그대로예요.)',
+    };
+
+    const customSel = s.tone === 'custom';
+    const customTone = {
+      style: 'cursor:pointer;border-radius:14px;padding:14px 15px;border:1.5px ' + (customSel ? 'solid #10B981' : 'dashed #C7D2CD') + ';background:' + (customSel ? '#ECFBF4' : '#FFFFFF') + ';transition:all .15s;',
+      labelStyle: 'font-size:14.5px;font-weight:800;color:' + (customSel ? '#0E9A6E' : '#16241F') + ';',
+      iconColor: customSel ? '#0E9A6E' : '#16241F',
+      onSelect: () => this.setState({ tone: 'custom' }),
+    };
+
+    const dot = (i) => 'width:' + (s.obStep === i ? '26px' : '8px') + ';height:8px;border-radius:999px;background:' + (s.obStep === i ? '#10B981' : '#D6DEDA') + ';transition:all .25s;';
+
+    return {
+      showDash: s.screen === 'dashboard',
+      showAsgn: s.screen === 'assignment',
+      showReview: s.screen === 'review',
+      showPersona: s.screen === 'persona',
+      navDash: nav('dashboard'), navAsgn: nav('assignment'), navReview: nav('review'), navPersona: nav('persona'),
+      goDash: () => this.setState({ screen: 'dashboard' }),
+      goAsgn: () => this.setState({ screen: 'assignment' }),
+      goReview: () => this.setState({ screen: 'review' }),
+      goPersona: () => this.setState({ screen: 'persona' }),
+      tiers, trail, todos, reviewItems, constraints, tones, customTone,
+      isCustomTone: customSel,
+      customText: s.customText,
+      onCustomTone: (e) => this.setState({ customText: e.target.value }),
+      name: s.name,
+      previewText: previews[s.tone] || previews.strict,
+      onName: (e) => this.setState({ name: e.target.value }),
+      onboarding: s.onboarding,
+      isOb0: s.obStep === 0, isOb1: s.obStep === 1, isOb2: s.obStep === 2, isOb3: s.obStep === 3,
+      obCounter: (s.obStep + 1) + ' / 4',
+      showBack: s.obStep > 0,
+      obNextLabel: s.obStep === 3 ? '시작하기' : '다음',
+      dot0: dot(0), dot1: dot(1), dot2: dot(2), dot3: dot(3),
+      obNext: () => this.setState(st => st.obStep >= 3 ? { onboarding: false } : { obStep: st.obStep + 1 }),
+      obPrev: () => this.setState(st => ({ obStep: Math.max(0, st.obStep - 1) })),
+      obRestart: () => this.setState({ onboarding: true, obStep: 0 }),
+      copyLabel: s.copied ? '복사됨!' : '복사',
+      copyCmd: () => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 1500); },
+    };
+  }
+}
+</script>
+</body>
+</html>
